@@ -1,0 +1,3 @@
+{
+  "hair": "Use case: background-extraction. Edit target: the attached 1024x1024 comic-book illustration of a flying superhero on a white background. Produce ONLY his hair as a transparent layer: the whole dark blue-black wavy hairstyle with its bright blue highlights and black ink strokes, including the loose curls around the top and sides and the locks falling over his forehead (the hair spans about x=368..545, y=100..225). Keep it at exactly its original position, size and shape on the same canvas. Remove his face, ears, skin, neck, suit, arms, legs and the white background: all of it genuine transparent alpha. Do not restyle or redraw the hair. No checkerboard, shadow or text."
+}
