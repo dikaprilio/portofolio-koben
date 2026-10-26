@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* Comic-book palette: printed paper, ink, and the hero's greens. */
+:root {
+  --paper: #fbf3df;
+  --cream: #fffdf6;
+  --ink: #0d0d12;
+  --night: #0b1b3a;
+  --night-2: #12306a;
+  --sun: #ffd23f;
+  --green: #2fdc5a;
+  --green-deep: #0f7a35;
+  --pink: #ff4f8b;
+  --sky: #3b7bff;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-sun: var(--sun);
+  --color-green: var(--green);
+  --color-green-deep: var(--green-deep);
+  --color-pink: var(--pink);
+  --color-sky: var(--sky);
+  --font-sans: var(--font-comic);
+  --font-mono: var(--font-space-mono);
+  --font-display: var(--font-bangers);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  /* Lenis drives the scroll; native smooth scrolling would fight it. */
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: var(--paper);
+  /* Printed-paper halftone. */
+  background-image: radial-gradient(rgba(13, 13, 18, 0.09) 1.2px, transparent 1.4px);
+  background-size: 9px 9px;
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--green);
+  color: var(--ink);
+}
+
+/* Display lettering: Bangers with an ink outline and a hard drop. */
+.comic-title {
+  font-family: var(--font-display), Impact, sans-serif;
+  letter-spacing: 0.03em;
+  -webkit-text-stroke: 0.045em var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 0.06em 0.06em 0 var(--ink);
+}
+
+/* A die-cut sticker: ink outline and a hard comic shadow. */
+.sticker {
+  display: inline-block;
+  padding: 0.04em 0.2em 0.06em;
+  border: max(3px, 0.05em) solid var(--ink);
+  box-shadow: 0.07em 0.08em 0 var(--ink);
+}
+
+/* An inked panel. */
+.panel {
+  border: 4px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.halftone-green {
+  background-color: #dff8e6;
+  background-image: radial-gradient(rgba(15, 122, 53, 0.25) 1.6px, transparent 1.8px);
+  background-size: 10px 10px;
+}
+
+.halftone-dark {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.4px, transparent 1.6px);
+  background-size: 11px 11px;
+}
+
+/* Speed lines rushing out from a point (set --x, --y). */
+.speed-lines {
+  background: repeating-conic-gradient(from 0deg at var(--x, 60%) var(--y, 40%), rgba(255, 255, 255, 0.08) 0deg 2.2deg, transparent 2.2deg 7deg);
+  mask-image: radial-gradient(circle at var(--x, 60%) var(--y, 40%), transparent 10%, #000 55%);
+}
+
+/* Comic speech bubble, tail set by --tail-x. */
+.bubble {
+  position: relative;
+  border: 4px solid var(--ink);
+  border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%;
+  background: #fff;
+}
+.bubble::before,
+.bubble::after {
+  content: "";
+  position: absolute;
+  top: -26px;
+  right: var(--tail-x, 20%);
+  border-style: solid;
+  transform: skewX(-25deg);
+}
+.bubble::before {
+  border-width: 0 0 30px 30px;
+  border-color: transparent transparent var(--ink) transparent;
+}
+.bubble::after {
+  top: -19px;
+  right: calc(var(--tail-x, 20%) + 5px);
+  border-width: 0 0 24px 22px;
+  border-color: transparent transparent #fff transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
